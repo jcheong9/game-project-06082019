@@ -18,8 +18,6 @@ public class spwanCircles : MonoBehaviour
     int indSyb = 0;
     static public string[] array2 = { "dictionary", "fisherman", "system", "filter" };
     string word = "";
-    [SerializeField]
-    static private Color colorToTurnTo = Color.green;
 
     // Start is called before the first frame update
     void Start()
@@ -119,9 +117,12 @@ public class spwanCircles : MonoBehaviour
         
         if (Equals(list[indSyb], syllable))
         {
-            changeColor(obj);
+            changeColor(obj, Color.green);
             word += syllable;
             indSyb++;
+        }else
+        {
+            changeColor(obj, Color.red);
         }
         if (Equals(array2[index], word))
         {
@@ -141,10 +142,10 @@ public class spwanCircles : MonoBehaviour
         }
         Debug.Log(word);
     }
-    public void changeColor(Collider2D obj)
+    public void changeColor(Collider2D obj, Color color)
     {
         rend = obj.GetComponent<Renderer>();
-        rend.material.color = colorToTurnTo;
+        rend.material.color = color;
     }
 
 }

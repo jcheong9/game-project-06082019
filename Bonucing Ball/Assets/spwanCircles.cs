@@ -14,14 +14,15 @@ public class spwanCircles : MonoBehaviour
     Vector2 whereToSpwan;
     public float spwanRate = 2f;
     float nextSpwan = 0.0f;
-    static public int index = 0;
     int indSyb = 0;
-    static public string[] array2 = { "dictionary", "fisherman", "system", "filter" };
+    //static public int index = 0;
+    //static public string[] array2 = { "dictionary", "fisherman", "system", "filter" };
     string word = "";
 
     // Start is called before the first frame update
     void Start()
     {
+
         updateCircle();
     }
     void Update()
@@ -97,7 +98,8 @@ public class spwanCircles : MonoBehaviour
     }
     public void updateCircle()
     {
-        var list = ListSyllables(array2[index]);
+        Debug.Log(PersistentManagerScript.Instance.listWords[PersistentManagerScript.Instance.index]);
+        var list = ListSyllables(PersistentManagerScript.Instance.listWords[PersistentManagerScript.Instance.index]);
         GameObject syllable = circles.transform.GetChild(0).gameObject;
         rend = circles.GetComponent<Renderer>();
         rend.sharedMaterial.color = Color.white;
@@ -113,7 +115,7 @@ public class spwanCircles : MonoBehaviour
     }
     public void checkWord(string syllable, Collider2D obj)
     {
-        var list = ListSyllables(array2[index]);
+        var list = ListSyllables(PersistentManagerScript.Instance.listWords[PersistentManagerScript.Instance.index]);
         
         if (Equals(list[indSyb], syllable))
         {
@@ -124,14 +126,15 @@ public class spwanCircles : MonoBehaviour
         {
             changeColor(obj, Color.red);
         }
-        if (Equals(array2[index], word))
+        //clear word and remove circle
+        if (Equals(PersistentManagerScript.Instance.listWords[PersistentManagerScript.Instance.index], word))
         {
             indSyb = 0;
             word = "";
             removeCircles();
-            if(array2.Length > index)
+            if(PersistentManagerScript.Instance.listWords.Length > PersistentManagerScript.Instance.index)
             {
-                index += 1;
+                PersistentManagerScript.Instance.index += 1;
                 updateCircle();
             }else
             {

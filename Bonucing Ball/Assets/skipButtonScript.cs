@@ -7,11 +7,11 @@ public class skipButtonScript : MonoBehaviour
 {
     public void changeWord()
     {
-        if (spwanCircles.array2.Length > spwanCircles.index)
+        if (PersistentManagerScript.Instance.listWords.Length > PersistentManagerScript.Instance.index)
         {
-            spwanCircles.index += 1;
+            PersistentManagerScript.Instance.index += 1;
         }
-        Debug.Log(spwanCircles.index);
+        Debug.Log(PersistentManagerScript.Instance.index);
         spwanCircles.removeCircles();
     }
 

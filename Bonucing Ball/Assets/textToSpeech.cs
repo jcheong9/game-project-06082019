@@ -22,7 +22,7 @@ public class textToSpeech : MonoBehaviour
     }
     IEnumerator DownloadTheAudio()
     {
-        //text = array2[index];
+        text = PersistentManagerScript.Instance.listWords[PersistentManagerScript.Instance.index];
         string url = "https://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=tw-ob&q="+text+"&tl=En-gb";
         WWW www = new WWW(url);
 
